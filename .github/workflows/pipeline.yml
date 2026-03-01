@@ -22,19 +22,20 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install -r requirements.txt
+        pip install -r lab1/requirements.txt
 
     - name: Lint with flake8
       run: |
-        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
-        flake8 . --count --max-complexity=10 --max-line-length=127 --statistics
+        flake8 lab1/ --count --select=E9,F63,F7,F82 --show-source --statistics
+        flake8 lab1/ --count --max-complexity=10 --max-line-length=127 --statistics
 
     - name: Test with pytest and export results
       run: |
+        cd lab1
         pytest --html=report.html
 
     - name: Upload test results
       uses: actions/upload-artifact@v4
       with:
         name: test-report
-        path: report.html
+        path: lab1/report.html
